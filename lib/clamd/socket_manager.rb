@@ -56,7 +56,7 @@ module Clamd
 
     def stream_to_clamd(socket, path)
       begin
-        if path.is_a? IO
+        if path.is_a?(IO) || path.class.included_modules.collect{|m| m.to_s}.include?('IO::generic_readable')
           file = path
         else
           file = File.open(path, "rb")
