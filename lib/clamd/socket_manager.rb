@@ -56,7 +56,11 @@ module Clamd
 
     def stream_to_clamd(socket, path)
       begin
-        file = File.open(path, "rb")
+        if path.is_? IO
+          file = path
+        else
+          file = File.open(path, "rb")
+        end
         bytes = file.read(chunk_size)
 
         while bytes
