@@ -56,7 +56,7 @@ module Clamd
 
     def stream_to_clamd(socket, path)
       begin
-        if path.is_? IO
+        if path.is_a? IO
           file = path
         else
           file = File.open(path, "rb")
